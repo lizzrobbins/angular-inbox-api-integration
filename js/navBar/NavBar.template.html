@@ -1,0 +1,77 @@
+<div ng-controller="navController as ctrl">
+
+  <div ng-if="(ctrl.totalSelected($ctrl.binding)==0)">
+    <div class="row toolbar">
+      <div class="col-md-12">
+        <p class="pull-right">
+          <span class="badge badge">2</span>
+          unread messages
+        </p>
+
+        <button class="btn btn-default" ng-click="ctrl.selectAll($ctrl.binding)">
+          <i class="fa fa-square-o"></i>
+        </button>
+
+        <button class="btn btn-default" ng-click="ctrl.markAsRead($ctrl.binding)">
+          Mark As Read
+        </button>
+
+        <button class="btn btn-default" ng-click="ctrl.markAsUnread($ctrl.binding)">
+          Mark As Unread
+        </button>
+
+        <select class="form-control label-select" ng-model="labels" ng-options="name.label as name.label for name in ctrl.allLabels track by name.id" ng-change="ctrl.applyLabel(labels)">
+          <option value="">Apply label</option>
+        </select>
+
+        <select class="form-control label-select" ng-model="labels" ng-options="name.label as name.label for name in ctrl.allLabels track by name.id" ng-change="ctrl.removeLabel(labels)">
+          <option value="">Remove label</option>
+        </select>
+
+        <button class="btn btn-default" ng-click="ctrl.deleteMessage($ctrl.binding)">
+          <i class="fa fa-trash-o"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div ng-if="(ctrl.totalSelected($ctrl.binding)>0)">
+    <div class="row toolbar">
+      <div class="col-md-12">
+        <p class="pull-right">
+          <span class="badge badge">2</span>
+          unread messages
+        </p>
+
+        <button class="btn btn-default" ng-if="(ctrl.totalSelected($ctrl.binding)>0) && (ctrl.totalSelected($ctrl.binding)<$ctrl.binding.length)" ng-click="ctrl.selectAll($ctrl.binding)">
+          <i class="fa fa-minus-square-o"></i>
+        </button>
+
+        <button class="btn btn-default"
+        ng-if="(ctrl.totalSelected($ctrl.binding)==$ctrl.binding.length)" ng-click="ctrl.selectNone($ctrl.binding)">
+          <i class="fa fa-check-square-o"></i>
+        </button>
+
+        <button class="btn btn-default" ng-click="ctrl.markAsRead($ctrl.binding)">
+          Mark As Read
+        </button>
+
+        <button class="btn btn-default" ng-click="ctrl.markAsUnread($ctrl.binding)">
+          Mark As Unread
+        </button>
+
+        <select class="form-control label-select" ng-model="labels" ng-options="name.label as name.label for name in ctrl.allLabels track by name.id" ng-change="ctrl.applyLabel(labels)">
+          <option value="">Apply label</option>
+        </select>
+
+        <select class="form-control label-select" ng-model="labels" ng-options="name.label as name.label for name in ctrl.allLabels track by name.id" ng-change="ctrl.removeLabel(labels)">
+          <option value="">Remove label</option>
+        </select>
+
+        <button class="btn btn-default" ng-click="ctrl.deleteMessage($ctrl.binding)">
+          <i class="fa fa-trash-o"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
