@@ -1,7 +1,7 @@
 angular.module('inboxApp')
 .controller('navController', navBarFun)
 
-function navBarFun() {
+function navBarFun($http) {
   const vm = this;
 
   vm.selectAll = function(mail) {
@@ -27,18 +27,53 @@ function navBarFun() {
     return counter
   }
 
-  vm.markAsRead = function(mail) {
+  vm.markAsRead = function(mail, boolean) {
     for (var i = 0; i < mail.length; i++) {
       if (mail[i].selected==true) {
-        mail[i].read = true
+        console.log('read loop is working');
+
+        let data = {
+          "messageIds": [ mail[i].id ],
+          "command": "read",
+          "read": true
+        }
+
+        $http.patch('https://floating-refuge-12080.herokuapp.com/api/messages', data).then(function(response) {
+          $http.get('https://floating-refuge-12080.herokuapp.com/api/messages')
+          .then(function(response){
+            mail = response.data._embedded.messages
+          })
+        })
+
       }
     }
   }
 
-  vm.markAsUnread = function(mail) {
+  vm.markAsUnread = function(mail, boolean) {
     for (var i = 0; i < mail.length; i++) {
       if (mail[i].selected==true) {
-        mail[i].read = false
+        console.log('unread loop is working');
+
+        let data = {
+          "messageIds": [ mail[i].id ],
+          "command": "read",
+          "read": false
+        }
+
+        $http.patch('https://floating-refuge-12080.herokuapp.com/api/messages', data)
+        // .then(function(response) {
+        //   $http.watchCollection('obj', function(newValue, oldValue) {
+        //     $http.msgObj = {
+        //       time: Date.now(),
+        //       newValue: clone(newValue),
+        //       oldValue: clone(oldValue)
+        //     }
+        //
+        //   })
+        //
+        //
+        // })
+
       }
     }
   }

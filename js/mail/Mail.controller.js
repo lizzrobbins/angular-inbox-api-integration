@@ -17,8 +17,6 @@ function messages($http) {
     }
 
     $http.patch('https://floating-refuge-12080.herokuapp.com/api/messages', data).then(function(response) {
-      console.log('star patch is done!');
-
       $http.get('https://floating-refuge-12080.herokuapp.com/api/messages')
       .then(function(response){
         vm.mail = response.data._embedded.messages
@@ -32,7 +30,7 @@ function messages($http) {
       "command": "read",
       "read": boolean
     }
-    
+
     $http.patch('https://floating-refuge-12080.herokuapp.com/api/messages', data).then(function(response) {
       console.log('read patch is done!');
 
