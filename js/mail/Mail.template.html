@@ -11,15 +11,15 @@
           </div>
           <div class="col-xs-2">
             <div ng-if="mail.starred==true">
-              <i ng-click="mail.starred=false" class="star fa fa-star"></i>
+              <i ng-click="ctrl.updateStarred(mail.id, false)" class="star fa fa-star"></i>
             </div>
             <div ng-if="mail.starred==false">
-              <i ng-click="mail.starred=true" class="star fa fa-star-o"></i>
+              <i ng-click="ctrl.updateStarred(mail.id, true)" class="star fa fa-star-o"></i>
             </div>
           </div>
         </div>
       </div>
-      <div ng-click="mail.read === true ? mail.read = false : mail.read = true">
+      <div ng-click="mail.read === true ? ctrl.updateRead(mail.id, false) : ctrl.updateRead(mail.id, true)">
         <div class="col-xs-11">
           <span class="label label-warning" ng-repeat="label in mail.labels">{{label}}</span>
           <a href="#">
